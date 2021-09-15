@@ -1,0 +1,56 @@
+Event Emitter 
+
+import EventEmitter from 'events';
+
+class MyEmitter extends EventEmitter {}
+
+const myEmitter = new MyEmitter();
+
+myEmitter.on('eventName', () => {
+    console.log('Event has been occured successfully');
+});
+
+myEmitter.emit('eventName');
+
+
+1. All objects that emit events are the instance of the EventEmitter class. These object exposes an 
+   eventEmitter.on() function to be attached
+
+   When the EventEmitter objects emits an event, all of the function attached to that specific event
+   are called synchronously
+
+* Handling events only onces
+
+Hence if we want to execute it only once 
+
+        const myEmitter = new MyEmitter();
+
+        let m = 0;
+
+        myEmitter.on('eventName', () =>{
+            console.log(++m);
+        });
+
+        myEmitter.emit('eventName');   output  =  1
+
+        myEmitter.emit('eventName');  output =  2
+
+==================================================================================================
+
+const myEmitter = new MyEmitter();
+
+        let m = 0;
+
+        myEmitter.once('eventName', () =>{
+            console.log(++m);
+        });
+
+        myEmitter.emit('eventName');   output  =  1
+
+        myEmitter.emit('eventName');  Ignored
+
+once() - add one time listener
+
+removelistener() / off() remove an event listener from an event
+
+
