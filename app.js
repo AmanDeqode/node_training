@@ -1,3 +1,8 @@
+/* Create an HTTP server to serve API's to GET / SET content of a static JSON file. 
+You can define content could be stored in JSON file 
+(it could be related to employees, students, inventory, etc.)
+ */
+
 import http from 'http';
 import fs from 'fs';
 import path from 'path';
@@ -43,13 +48,23 @@ const handlePosts = (req, res) => {
     req.on('end', () => {
       const user = Buffer.concat(body).toString();
 
-      const check = JSON.parse(user);
+      const validPost = JSON.parse(user);
 
-      if (!check.userId) {
+      if (!validPost.userId) {
         res.statusCode = 206;
         return res.end('UserId not found');
       }
-      const duplicatePost = posts.filter((post) => post.userId === check.userId);
+      if(typeof validPost !== 'number')
+      {
+        res.statusCode = 406;
+        return res.end('Please send valid number of keys and value');
+      }
+      if(Object.keys(validPost)>3)
+      {
+        res.statusCode = 406;
+        return res.end('UserId is not acceptable');
+      }
+      const duplicatePost = posts.filter((post) => post.userId === validPost.userId);
 
       if (duplicatePost.length !== 0) {
         res.statusCode = 400;
