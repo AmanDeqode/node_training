@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --exec babel-node app.js",
+    "start": "nodemon --exec babel-node src/index.js",
     "lint": "eslint .",
     "prepare": "husky install"
   },
@@ -37,7 +37,11 @@
   "dependencies": {
     "@babel/cli": "^7.15.4",
     "@babel/core": "^7.15.5",
-    "express": "^4.17.1"
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^10.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "helmet": "^4.6.0"
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix"
