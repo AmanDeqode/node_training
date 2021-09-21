@@ -16,7 +16,7 @@
         <% if (users.length > 0) { %>
         <table class="table">
             <tr>
-                <th>Id</th><th>username</th><th>email</th>
+                <th>Id</th><th>username</th><th>email</th><th>doc type</th>
             </tr>
          
                 <div class="grid">
@@ -25,6 +25,7 @@
                             <td><%= user.id%></td>
                             <td><%= user.username%></td>
                             <td><%= user.email%></td>
+                            <td><%= user.docs.split('.').at(-1)%></td>
                         </tr>
                             
                         <% } %>
