@@ -13,7 +13,10 @@ router.post(
   [
     check('username', 'Username must be required').not().isEmpty(),
     check('email', 'Please enter the valid email').isEmail(),
-    check('password', 'Please enter the valid password').isLength({ min: 8 }),
+    check(
+      'password',
+      'Please enter password with min length of 8 character'
+    ).isLength({ min: 8 }),
   ],
   userController.addnewUser
 );
