@@ -4,7 +4,10 @@ import { validationResult } from 'express-validator';
 
 import users from '../views/users.json';
 
-function saveUser(newUser) {
+function saveUser(userData) {
+  const newUser = userData.body;
+  newUser.docs = userData.file.filename;
+  console.log('newUser', newUser);
   const totalUsers = users.length;
 
   newUser.id = totalUsers + 1;
@@ -39,7 +42,7 @@ exports.addnewUser = (req, res) => {
   if (existingUser.length !== 0) {
     return res.render('signup', { error: '', msg: 'Email id already exists' });
   }
-  saveUser(req.body);
+  saveUser(req);
 
   return res.render('home', { users, msg: 'User has been successfully' });
 };
