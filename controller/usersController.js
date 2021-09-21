@@ -25,17 +25,19 @@ function saveUser(newUser) {
 }
 exports.getallUsers = (req, res) =>
   res.render('home', { users, msg: '', error: '' });
-exports.signup = (req, res) => res.render('signup', { error: '' });
+
+exports.signup = (req, res) => res.render('signup', { error: '', msg: '' });
+
 exports.addnewUser = (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.render('signup', { error: errors.array() });
+    return res.render('signup', { error: errors.array(), msg: '' });
   }
   const { email } = req.body;
   const existingUser = users.filter((user) => user.email === email);
 
   if (existingUser.length !== 0) {
-    return res.render('signup', { error: 'Email id already exists' });
+    return res.render('signup', { error: '', msg: 'Email id already exists' });
   }
   saveUser(req.body);
 
