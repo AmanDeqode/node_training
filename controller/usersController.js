@@ -1,12 +1,14 @@
 import fs from 'fs';
 import path from 'path';
-import { validationResult } from 'express-validator';
+import { check, validationResult } from 'express-validator';
 
 import users from '../views/users.json';
 
 function saveUser(userData) {
   const newUser = userData.body;
-  newUser.docs = userData.file.filename;
+  if (userData.file) {
+    newUser.docs = userData.file.filename;
+  }
   console.log('newUser', newUser);
   const totalUsers = users.length;
 
@@ -26,12 +28,22 @@ function saveUser(userData) {
   );
   return users;
 }
-exports.getallUsers = (req, res) =>
+export const getallUsers = (req, res) =>
   res.render('home', { users, msg: '', error: '' });
 
-exports.signup = (req, res) => res.render('signup', { error: '', msg: '' });
+export const signup = (req, res) =>
+  res.render('signup', { error: '', msg: '' });
 
-exports.addnewUser = (req, res) => {
+export const validateData = () => [
+  check('username', 'Username must be required').not().isEmpty(),
+  check('email', 'Please enter the valid email').isEmail(),
+  check(
+    'password',
+    'Please enter password with min length of 8 character'
+  ).isLength({ min: 8 }),
+];
+
+export const addnewUser = (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.render('signup', { error: errors.array(), msg: '' });
@@ -46,7 +58,7 @@ exports.addnewUser = (req, res) => {
 
   return res.render('home', { users, msg: 'User has been successfully' });
 };
-exports.loginUser = (req, res) => {
+export const loginUser = (req, res) => {
   const { email, password } = req.body;
   const validUser = users.some(
     (user) => user.email === email && user.password === password
