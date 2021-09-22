@@ -22,6 +22,7 @@
         "spaced-comment": "off",
         "no-process-exit": "off",
         "no-param-reassign": "off",
+        "no-unused-expressions":"off",
         "object-shorthand": "off",
         "class-methods-use-this": "off",
         "node/no-unsupported-features/es-syntax": [
