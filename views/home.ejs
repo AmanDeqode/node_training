@@ -8,6 +8,7 @@
     <title>Home</title>
 </head>
 <body>
+    <a href="/">Home</a>
     <% if(msg) {%>
         <%= msg%>
         <%}%>
@@ -25,7 +26,11 @@
                             <td><%= user.id%></td>
                             <td><%= user.username%></td>
                             <td><%= user.email%></td>
-                            <td><%= user.docs.split('.').at(-1)%></td>
+                            <% if(user.docs) {%>
+                                <td><%= user.docs.split('.').at(-1)%></td>
+                                <%} else {%>
+                                    <td>not selected</td>
+                                    <%}%>
                         </tr>
                             
                         <% } %>
