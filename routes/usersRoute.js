@@ -1,30 +1,49 @@
+import path from 'path';
 import express from 'express';
-import { check } from 'express-validator';
+import multer from 'multer';
 
-import userController from '../controller/usersController';
+import {
+  addnewUser,
+  getallUsers,
+  loginUser,
+  signup,
+  validateData,
+} from '../controller/usersController';
 
 const router = express.Router();
+/* eslint-disable */
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, path.join(__dirname,'..','views/documents'));
+  },
+  filename: (req, file, cb) => {
+    console.log(file);
+    const { originalname } = file;
+    cb(null, new Date().toISOString().replace(/[\/\\:]/g, "_") + originalname)
+  }
+});
+/* eslint-enable */
+const uploads = multer({
+  storage,
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype === 'application/pdf') {
+      cb(null, true);
+    } else {
+      cb(null, false);
+      return cb(new Error('Only pdf format allowed'));
+    }
+  },
+});
 
-router.get('/', userController.getallUsers);
-router.get('/signup', userController.signup);
+router.get('/', getallUsers);
+router.get('/signup', signup);
 
-router.post(
-  '/newUser',
-  [
-    check('username', 'Username must be required').not().isEmpty(),
-    check('email', 'Please enter the valid email').isEmail(),
-    check(
-      'password',
-      'Please enter password with min length of 8 character'
-    ).isLength({ min: 8 }),
-  ],
-  userController.addnewUser
-);
+router.post('/newUser', uploads.single('docs'), validateData(), addnewUser);
 
 router.get('/login', (req, res) => {
   res.render('login', { error: '', msg: '' });
 });
 
-router.post('/login', userController.loginUser);
+router.post('/login', loginUser);
 
 export default router;
