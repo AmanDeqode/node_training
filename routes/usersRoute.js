@@ -2,13 +2,7 @@ import path from 'path';
 import express from 'express';
 import multer from 'multer';
 
-import {
-  addnewUser,
-  getallUsers,
-  loginUser,
-  signup,
-  validateData,
-} from '../controller/usersController';
+import userMethods from '../controller/usersController';
 
 const router = express.Router();
 /* eslint-disable */
@@ -35,15 +29,20 @@ const uploads = multer({
   },
 });
 
-router.get('/', getallUsers);
-router.get('/signup', signup);
+router.get('/', userMethods.getallUsers);
+router.get('/signup', userMethods.signup);
 
-router.post('/newUser', uploads.single('docs'), validateData(), addnewUser);
+router.post(
+  '/newUser',
+  uploads.single('docs'),
+  userMethods.validateData(),
+  userMethods.addnewUser
+);
 
 router.get('/login', (req, res) => {
   res.render('login', { error: '', msg: '' });
 });
 
-router.post('/login', loginUser);
+router.post('/login', userMethods.loginUser);
 
 export default router;
