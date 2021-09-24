@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href="/css/home.css">
+    <title>Home</title>
+</head>
+<body>
+    <a href="/">Home</a>
+    <% if(msg) {%>
+        <%= msg%>
+        <%}%>
+    <h2 class="heading">List of all users </h2>
+    <main class='users'>
+        <% if (users.length > 0) { %>
+        <table class="table">
+            <tr>
+                <th>Id</th><th>username</th><th>email</th><th>doc type</th>
+            </tr>
+         
+                <div class="grid">
+                    <% for (let user of users) { %>
+                        <tr>
+                            <td><%= user.id%></td>
+                            <td><%= user.username%></td>
+                            <td><%= user.email%></td>
+                            <% if(user.docs) {%>
+                                <td><%= user.docs.split('.').at(-1)%></td>
+                                <%} else {%>
+                                    <td>not selected</td>
+                                    <%}%>
+                        </tr>
+                            
+                        <% } %>
+                </div>
+        </table>
+        <% } else { %>
+            <h1>No users Found!</h1>
+            <% } %>
+            <div class="button">
+                <a href="/signup">Add New User?</a>
+                <a href="/login">Existing User</a>
+            </div>
+    </main>
+</body>
+</html>
