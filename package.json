@@ -42,7 +42,7 @@
     "express": "^4.17.1"
   },
   "lint-staged": {
-    "*.js": ["eslint --max-warnings 0",
+    "*.js": ["eslint --cache --fix",
     "git add"]
   }
 }
