@@ -14,20 +14,20 @@
         <%}%>
     <h2 class="heading">List of all users </h2>
     <main class='users'>
-        <% if (users.length > 0) { %>
+        <% if (allEmployees.length > 0) { %>
         <table class="table">
             <tr>
-                <th>Id</th><th>username</th><th>email</th><th>doc type</th>
+                <th>Id</th><th>Username</th><th>Email</th><th>Doc Type</th>
             </tr>
          
                 <div class="grid">
-                    <% for (let user of users) { %>
+                    <% for (let employee of allEmployees) { %>
                         <tr>
-                            <td><%= user.id%></td>
-                            <td><%= user.username%></td>
-                            <td><%= user.email%></td>
-                            <% if(user.docs) {%>
-                                <td><%= user.docs.split('.').at(-1)%></td>
+                            <td><%= employee.id%></td>
+                            <td><%= employee.username%></td>
+                            <td><%= employee.email%></td>
+                            <% if(employee.document) {%>
+                                <td><%= employee.document.split('.').at(-1)%></td>
                                 <%} else {%>
                                     <td>not selected</td>
                                     <%}%>
