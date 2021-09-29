@@ -2,6 +2,7 @@ import path from 'path';
 import express from 'express';
 import dotenv from 'dotenv';
 
+import { db } from './config/db';
 import routes from './routes/index';
 
 dotenv.config();
@@ -12,10 +13,16 @@ const app = express();
 
 class Server {
   constructor() {
-    this.assigns();
-    this.middlewares();
-    this.routes();
-    this.start();
+    this.authenticateDB();
+  }
+
+  async authenticateDB() {
+    try {
+      await db.authenticate();
+      console.log('Connected to the database');
+    } catch (error) {
+      console.log(new Error(error));
+    }
   }
 
   assigns() {
@@ -41,4 +48,7 @@ class Server {
 }
 
 const listen = new Server();
-listen;
+listen.assigns();
+listen.middlewares();
+listen.routes();
+listen.start();
