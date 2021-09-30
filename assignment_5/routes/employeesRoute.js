@@ -18,17 +18,17 @@ const storage = multer.diskStorage({
 }); /* eslint-enable */
 const uploads = multer({ storage });
 
-router.get('/', Employee.getallEmployees);
+router.get('/employees', Employee.getallEmployees);
 router.get('/signup', Employee.signup);
 router.get('/login', Credentials.loginPage);
 router.post(
-  '/addEmployee',
+  '/employees',
   uploads.single('document'),
   Employee.validateData(),
-  Employee.addNewEmployee
+  Employee.addEmployee
 );
 router.post('/login', Credentials.loginEmployee);
-router.post('/editEmployee/:employeeId', Employee.editEmployee);
-router.delete('/deleteEmployee/:employeeId', Employee.deleteEmployee);
+router.patch('/employees/:employeeId', Employee.editEmployee);
+router.delete('/employees/:employeeId', Employee.deleteEmployee);
 
 export default router;
