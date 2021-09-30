@@ -1,10 +1,25 @@
 import Sequelize from 'sequelize';
+import dotenv from 'dotenv';
 
-export const db = new Sequelize('registeruser', 'postgres', 'deq@123', {
-  host: 'localhost',
-  dialect: 'postgres',
-  logging: false,
-  define: {
-    timestamps: false,
-  },
-});
+dotenv.config();
+const {
+  NODE_ENV_DATABASE,
+  NODE_ENV_USERNAME,
+  NODE_ENV_PASSWORD,
+  NODE_ENV_DIALECT,
+  HOST,
+} = process.env;
+
+export const db = new Sequelize(
+  NODE_ENV_DATABASE,
+  NODE_ENV_USERNAME,
+  NODE_ENV_PASSWORD,
+  {
+    host: HOST,
+    dialect: NODE_ENV_DIALECT,
+    logging: false,
+    define: {
+      timestamps: false,
+    },
+  }
+);
