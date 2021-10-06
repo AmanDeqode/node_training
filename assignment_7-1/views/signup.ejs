@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
+    <title>SignUp</title>
+</head>
+<body>
+    <% if(error) {%>
+        <%for(let key in error) {%>
+            <%= error[key].msg%>
+            <%}%>
+        <%}%>
+    <% if(msg) {%>
+        <%= msg%>
+        <%}%>
+    <form action="/employees" method="POST" enctype="multipart/form-data">
+        <h2>Add New User</h2>
+        <div class="input-field">
+            <input type="text" name="username" id="username" placeholder="Enter Username">
+        </div>
+        <div class="input-field">
+            <input type="text" name="email" id="email" placeholder="Enter Email">
+        </div>
+        <div class="input-field">
+            <input type="password" name="password" id="password" placeholder="Enter Password">
+        </div>
+        <div class="input-field">
+            <input type="file" name="document" id="document">
+        </div>
+        <button type="submit" value="signup">Sign Up</button>
+        <a href="/employees">Home</a>
+    </form>
+    
+</body>
+</html>

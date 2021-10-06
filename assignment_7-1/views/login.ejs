@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
+    <link rel='stylesheet' href="/css/home.css">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Login Here</h2>
+    <% if(error) {%>
+        <%= error%>
+        <%}%>
+    <form action="/login" method="POST">
+        <div class="input-field">
+            <input type="text" name="email" id="email" placeholder="Enter Email">
+        </div>
+        <div class="input-field">
+            <input type="password" name="password" id="password" placeholder="Enter Password">
+        </div>
+        <button type="submit" value="login">Login</button>
+    </form>
+    <div class="button">
+        <a href="/signup">Add New User?</a>
+    </div>
+</body>
+</html>
