@@ -13,6 +13,7 @@
         "ecmaVersion": 12,
         "sourceType": "module"
     },
+    "parser": "@babel/eslint-parser", 
     "rules": {
         "prettier/prettier": "warn",
         "no-unused-vars": "warn",
@@ -22,6 +23,7 @@
         "spaced-comment": "off",
         "no-process-exit": "off",
         "no-param-reassign": "off",
+        "no-unused-expressions":"off",
         "object-shorthand": "off",
         "class-methods-use-this": "off",
         "import/prefer-default-export": "off",
@@ -35,7 +37,8 @@
           "import/extensions": [
             "error",
             {
-              "js": "ignorePackages"
+              "js": "ignorePackages",
+              "json": "ignorePackages"
             }
           ]
     }
