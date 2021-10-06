@@ -4,7 +4,10 @@
   "description": "node training started",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --exec babel-node app.js",
+    "lint": "eslint .",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -15,5 +18,28 @@
   "bugs": {
     "url": "https://github.com/AmanDeqode/node_training/issues"
   },
-  "homepage": "https://github.com/AmanDeqode/node_training#readme"
+  "homepage": "https://github.com/AmanDeqode/node_training#readme",
+  "devDependencies": {
+    "@babel/node": "^7.15.4",
+    "@babel/preset-env": "^7.15.6",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-node": "^4.1.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.1.2",
+    "nodemon": "^2.0.12",
+    "prettier": "^2.4.0"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.15.4",
+    "@babel/core": "^7.15.5",
+    "express": "^4.17.1"
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix"
+  }
 }
