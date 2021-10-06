@@ -8,13 +8,17 @@ function initialize(passport) {
   console.log('Initialized');
 
   const authenticateEmployee = async (email, password, done) => {
-    const employee = await Employee.findOne({
-      where: { email: email },
-    });
-    if (!employee) return done(null, false, { error: 'Invalid Email' });
-    const isMatch = await bcrypt.compare(password, employee.password);
-    if (!isMatch) return done(null, false, { error: 'Invalid Password' });
-    return done(null, employee);
+    try {
+      const employee = await Employee.findOne({
+        where: { email: email },
+      });
+      if (!employee) return done(null, false, { error: 'Invalid Email' });
+      const isMatch = await bcrypt.compare(password, employee.password);
+      if (!isMatch) return done(null, false, { error: 'Invalid Password' });
+      return done(null, employee);
+    } catch (error) {
+      done(error);
+    }
   };
   passport.use(
     new LocalStrategy(
