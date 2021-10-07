@@ -6,7 +6,7 @@ import session from 'express-session';
 
 import { db } from './config/db';
 import routes from './routes/index';
-import initializePassport from './config/passport';
+import './config/passport';
 
 dotenv.config();
 
@@ -17,7 +17,7 @@ const app = express();
 class Server {
   constructor() {
     this.authenticateDB();
-    initializePassport(passport);
+    // initializePassport(passport);
   }
 
   async authenticateDB() {
