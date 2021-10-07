@@ -4,13 +4,6 @@ import bcrypt from 'bcryptjs';
 import Employee from '../models/Employee';
 
 class Employees {
-  static checkNotAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) {
-      return next();
-    }
-    res.redirect('/login');
-  }
-
   static validateData = () => [
     check('username', 'Username must be required').not().isEmpty(),
     check('email', 'Please enter the valid email').isEmail(),
