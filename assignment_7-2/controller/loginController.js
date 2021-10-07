@@ -4,12 +4,8 @@ import bcrypt from 'bcryptjs';
 import Employee from '../models/Employee';
 
 class Credentials {
-  static checkAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) {
-      return res.redirect('/employees');
-    }
-    next();
-  }
+  static isLoggedIn = (req, res, next) =>
+    req.user ? next() : res.redirect('/login'); // eslint-disable-line no-use-before-define
 
   static validateData = () => [
     check('email', 'Please enter the valid email').isEmail(),
@@ -34,13 +30,14 @@ class Credentials {
       }
       const isMatch = await bcrypt.compare(password, validEmployee.password);
       if (!isMatch) return res.render('login', { error: 'Invalid password' });
-      return res.render('home', { msg: 'Loggedin Successfully' });
+      return res.redirect('/employees');
     } catch (error) {
       throw new Error(error.message);
     }
   };
 
   static logout = (req, res) => {
+    req.session.destroy();
     req.logout();
     return res.render('login', { error: '', msg: 'Logged Out Successfully' });
   };
