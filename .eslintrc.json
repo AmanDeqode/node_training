@@ -13,6 +13,7 @@
         "ecmaVersion": 12,
         "sourceType": "module"
     },
+    "parser": "@babel/eslint-parser",
     "rules": {
         "prettier/prettier": "warn",
         "no-unused-vars": "warn",
