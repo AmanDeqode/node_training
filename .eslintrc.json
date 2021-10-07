@@ -35,7 +35,8 @@
           "import/extensions": [
             "error",
             {
-              "js": "ignorePackages"
+              "js": "ignorePackages",
+              "json":"ignorePackages"
             }
           ]
     }
